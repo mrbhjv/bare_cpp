@@ -5,18 +5,25 @@
 
 namespace string_calculator
 {
-    inline int add(std::string something)
+    inline static std::string DELIMITER = ",";
+
+    inline void validate_string(std::string str)
     {
-        if (something.empty())
+        if (str.find(DELIMITER) != std::string::npos)
+        {
+            std::stoi(str.substr(0, str.find(DELIMITER)));
+            std::stoi(str.substr(str.find(DELIMITER) + 1));
+        }
+    }
+
+    inline int add(std::string str)
+    {
+        if (str.empty())
         {
             return 0;
         }
-        if (something.find(",") != std::string::npos)
-        {
-            std::stoi(something.substr(0, something.find(",")));
-            std::stoi(something.substr(something.find(",") + 1));
-        }
-        return std::stoi(something);
+        validate_string(str);
+        return std::stoi(str);
     }
 } // namespace string_calculator
 
