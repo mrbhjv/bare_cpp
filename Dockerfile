@@ -10,6 +10,9 @@ RUN apt-get update && apt-get install -y \
     git \
     gdb \
     sudo \
+    locales \
+    locales-all \
+    lcov \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://github.com/google/googletest.git \
@@ -19,6 +22,10 @@ RUN git clone https://github.com/google/googletest.git \
     && make -j8 \
     && make install \
     && ldconfig
+
+ENV LC_ALL en_US.UTF-8 
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en
 
 ARG USERNAME=samurai
 # On Linux, replace with your actual UID, GID if not the default 1000
