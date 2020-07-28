@@ -7,12 +7,27 @@ namespace string_calculator
 {
     inline static std::string DELIMITER = ",";
 
+    inline std::string value_before_delimiter(std::string str)
+    {
+        return str.substr(0, str.find(DELIMITER));
+    }
+
+    inline std::string value_after_delimiter(std::string str)
+    {
+        return str.substr(str.find(DELIMITER) + 1);
+    }
+
+    inline bool has_delimiter(std::string str)
+    {
+        return str.find(DELIMITER) != std::string::npos;
+    }
+    
     inline void validate_string(std::string str)
     {
-        if (str.find(DELIMITER) != std::string::npos)
+        if (has_delimiter(str))
         {
-            std::stoi(str.substr(0, str.find(DELIMITER)));
-            std::stoi(str.substr(str.find(DELIMITER) + 1));
+            std::stoi(value_before_delimiter(str));
+            std::stoi(value_after_delimiter(str));
         }
     }
 
